@@ -27,6 +27,18 @@ public class Card {
         }
         int exitPoint = ((endPoint - startPoint[0]) / 3) + startPoint[0];
         entry = new Entry(signature, exitPoint);
+        debug();
+    }
+
+    @SneakyThrows
+    private void debug() {
+        AtomicInteger y = new AtomicInteger();
+        Arrays.stream(entry.suitSignature).forEach(x -> {
+            image.setRGB(x, y.get(), Color.red.getRGB());
+            y.getAndIncrement();
+        });
+        ImageIO.write(image, "png", new File("C:/Users/harde/IdeaProjects/training-laboratory/src/main/java/io/results/" + entry.suit + "result" + this.hashCode() + ".png"));
+        System.out.println(entry.suit);
     }
 
     private int[] findStartPoint() {
